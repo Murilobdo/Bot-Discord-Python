@@ -14,4 +14,4 @@
 
 ### Comandos
 
-<h3>!temp-[cidade-alvo] por exemplo !temp-Sorocaba</h3>
+## temp-[cidade-alvo] por exemplo !temp-Sorocaba
