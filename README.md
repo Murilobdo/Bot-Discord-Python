@@ -14,4 +14,4 @@
 
 ### Comandos
 
-## temp-[cidade-alvo] por exemplo !temp-Sorocaba
+## !temp-[cidade-alvo] por exemplo !temp-Sorocaba
