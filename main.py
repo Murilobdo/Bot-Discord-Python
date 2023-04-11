@@ -1,28 +1,21 @@
+
 import discord
-from discord.ext import commands
+import requests
 
+class MyClient(discord.Client):
+    async def on_ready(self):
+        print('Logged on as {0}!'.format(self.user))
 
-bot = discord.Client()
+    def getRandomAnimal(self):
+        response = requests.get('https://goweather.herokuapp.com/weather/sorocaba')
+        return f'Hoje está {response.json()["temperature"]} em Sorocaba!'
+        
+    async def on_message(self, message):
+        if(message.content.startswith('!temperatura')):
+            text = self.getRandomAnimal()
+            await message.channel.send(text)
 
-#Inicialização do bot
-@bot.event
-async def on_ready():
-    print(f'Logado: {bot.user}')
+intents = discord.Intents.all()
+client = MyClient(intents=intents)
 
-#Log
-@bot.event
-async def on_message(message):
-    print(f'Message de {message.author}: {message.content}')
-    await bot.process_commands(message)
-
-#Comandos
-@bot.command(name="ola")
-async def ola(message):
-    await message.channel.send("Olá, você faz parte da turma? Caso não, venha fazer parte! :D")
-
-@bot.command(name="tabnews")
-async def tabnews(message):
-    await message.channel.send("O Tabnews é uma plataforma que podemos compartilhar experiência, informações e notícias sobre tecnologia, idealizado pelo Filipe Deschamps.")
-
-#Token
-bot.run(token='TOKEN')
+client.run('MTA5NDgwMzk3NTgxNzEzODIyNw.GnaMlG.o4bkOawWNQiCczbavB7qIdUTgMCXYlJr7UqxOQ')
