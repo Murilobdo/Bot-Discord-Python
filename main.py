@@ -6,16 +6,19 @@ class MyClient(discord.Client):
     async def on_ready(self):
         print('Logged on as {0}!'.format(self.user))
 
-    def getRandomAnimal(self):
-        response = requests.get('https://goweather.herokuapp.com/weather/sorocaba')
-        return f'Hoje está {response.json()["temperature"]} em Sorocaba!'
+    def getRandomAnimal(self, city):
+        response = requests.get(f'https://goweather.herokuapp.com/weather/{city}')
+        return f'Hoje está {response.json()["temperature"]} em {city}!'
         
     async def on_message(self, message):
-        if(message.content.startswith('!temperatura')):
-            text = self.getRandomAnimal()
+        city = message.content.split('!temp-')[1]
+        if(city is not '' or None):
+            text = self.getRandomAnimal(city)
             await message.channel.send(text)
+        else:
+            await message.channel.send('comando inválido, o correto é !temp-[cidade-alvo]')
 
 intents = discord.Intents.all()
 client = MyClient(intents=intents)
 
-client.run('SEU TOKEN DO DISCORD DEVELOPER')
+client.run('TOKEN DISCORD')
