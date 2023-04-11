@@ -18,4 +18,4 @@ class MyClient(discord.Client):
 intents = discord.Intents.all()
 client = MyClient(intents=intents)
 
-client.run('MTA5NDgwMzk3NTgxNzEzODIyNw.GnaMlG.o4bkOawWNQiCczbavB7qIdUTgMCXYlJr7UqxOQ')
+client.run('SEU TOKEN DO DISCORD DEVELOPER')
